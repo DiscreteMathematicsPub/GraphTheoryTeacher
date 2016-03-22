@@ -6,12 +6,17 @@
  */
 
 #include "DepthFirstPaths.h"
+#include <iostream>
 
 namespace std {
 
 DepthFirstPaths::DepthFirstPaths(AdjListGraph & g, int s) {
-	visited = new bool[g.getSize()];
-	edgeTo = new int[g.getSize()];
+	visited = new bool[g.getOrder()];
+	for (int i=0; i<g.getOrder(); i++) {
+		visited[i]=false;
+	}
+
+	edgeTo = new int[g.getOrder()];
 	this->s = s;
 	dfs(g,s);
 }
@@ -38,6 +43,12 @@ bool DepthFirstPaths::hasPathTo(int v) {
 
 list<int> DepthFirstPaths::pathTo(int v) {
 	list<int> path;
+
+	if (!hasPathTo(v)) {
+		path.push_back(-1);
+		return path; //there is no path
+	}
+
 	for (int x = v; x !=s; x=edgeTo[x]) {
 		path.push_back(x);
 	}

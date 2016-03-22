@@ -13,6 +13,10 @@ namespace std {
 
 BreadthFirstPaths::BreadthFirstPaths(AdjListGraph & g, int s) {
 	visited = new bool[g.getSize()];
+	for (int i=0; i<g.getOrder(); i++) {
+		visited[i]=false;
+	}
+
 	edgeTo = new int[g.getSize()];
 	this->s = s;
 	bfs(g,s);
@@ -48,6 +52,12 @@ bool BreadthFirstPaths::hasPathTo(int v) {
 
 list<int> BreadthFirstPaths::pathTo(int v) {
 	list<int> path;
+
+	if (!hasPathTo(v)) {
+		path.push_back(-1);
+		return path; //there is no path
+	}
+
 	for (int x = v; x !=s; x=edgeTo[x]) {
 		path.push_back(x);
 	}

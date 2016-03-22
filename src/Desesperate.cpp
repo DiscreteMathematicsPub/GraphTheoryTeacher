@@ -52,17 +52,19 @@ int main() {
 	//tinyClassExample //hola
 	AdjListGraph k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyClassExample.txt");
 	cout << "k: \n" << k.toString() << endl;
+	cout << "order: " << k.getOrder() << endl;
 
 	/*
 	 * Depth First Path
 	 */
+
 	DepthFirstPaths dfp = DepthFirstPaths(k,0);
 	for (int i = 0; i < k.getOrder(); i++)  {
 		list<int> paths = dfp.pathTo(i);
 		cout << endl << "Depth First Path. From 0 to " << i << ":  ";
 		printPath(paths);
 	}
-	cout << endl;
+	cout <<endl;
 
 	/*
 	 * Breadth First Path
