@@ -41,7 +41,7 @@ void Cycle::dfs(AdjListGraph & g, int u, int v) {
 			edgeTo[w] = v;
 			dfs(g, v, w);
 		}
-		else if (w != v) { //disregard reverse of edge leading to v
+		else if (w != u) { //disregard reverse of edge leading to v
 			for (int x = v; x!=w; x=edgeTo[x]) {
 				cycle.push(x);
 			}
