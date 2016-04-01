@@ -10,14 +10,14 @@
 
 namespace std {
 
-Cycle::Cycle(AdjListGraph & g) {
-	if (hasSelfLoop(g)) return;
-	if (hasParallelEdges(g)) return;
-
+Cycle::Cycle(AdjListGraph &g) {
 	visited = new bool[g.getOrder()];
 	for (int i=0; i<g.getOrder(); i++) {
 		visited[i]=false;
 	}
+
+	if (hasSelfLoop(g)) return;
+	if (hasParallelEdges(g)) return;
 
 	edgeTo = new int[g.getOrder()];
 	for (int v=0; v<g.getOrder(); v++) {
@@ -57,6 +57,40 @@ bool Cycle:: hasCycle() {
 
 stack<int> & Cycle:: getCycle() {
 	return cycle;
+}
+
+bool Cycle::hasSelfLoop(AdjListGraph &g) {
+	for (int v=0; v < g.getOrder(); v++) {
+		for (auto &w : g.adj(v)) {
+			if (v==w) {
+				cycle.push(v);
+				cycle.push(v);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Cycle::hasParallelEdges(AdjListGraph &g) {
+	for (int v=0; v < g.getOrder(); v++) {
+		for (auto &w : g.adj(v)) {
+			if (visited[w]) {
+				cycle.push(v);
+				cycle.push(w);
+				cycle.push(v);
+				return true;
+			}
+			visited[w] = true;
+		}
+	}
+
+	// reset visited
+	for (int i=0; i<g.getOrder(); i++) {
+		visited[i]=false;
+	}
+
+	return false;
 }
 
 

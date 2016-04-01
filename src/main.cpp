@@ -14,6 +14,7 @@
 #include "graph/BreadthFirstPaths.h"
 #include "graph/DirectedCycle.h"
 #include "graph/ConnectedComponents.h"
+#include "graph/Bipartite.h"
 
 using namespace std;
 
@@ -108,6 +109,19 @@ int main() {
 	cout << "Number of connected components: " << cc.numberComponents() << endl;
 	cout << "connected 0 - 4: " << cc.connected(0,4) << " id[0], id[4]: " << cc.componentId(0) << ", " << cc.componentId(4)<< endl;
 	cout << "connected 0 - 7: " << cc.connected(0,7) << " id[0], id[7]: " << cc.componentId(0) << ", " << cc.componentId(7)<< endl;
+	cout << endl;
+
+
+	/*
+	 * Bipartite
+	 */
+	//AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\bipartite.txt");
+	AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
+	Bipartite bp(g);
+	for (int i=0; i<g.getOrder(); i++) {
+		cout << i << " col: " << bp.getColor(i) << endl;
+	}
+	printStack(bp.oddCycle());
 
 
 
