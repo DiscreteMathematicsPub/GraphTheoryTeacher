@@ -2,7 +2,7 @@
 
 ### Eclipse ###
 
-.metadata
+#.metadata
 bin/
 tmp/
 *.tmp
@@ -10,11 +10,11 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
-.loadpath
+#.settings/
+#.loadpath
 
 # Eclipse Core
-.project
+#.project
 
 # External tool builders
 .externalToolBuilders/
@@ -26,7 +26,7 @@ local.properties
 *.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
-.cproject
+#.cproject
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
@@ -98,3 +98,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /Default/
+/Debug/

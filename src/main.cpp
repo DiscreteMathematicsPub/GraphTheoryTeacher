@@ -1,9 +1,7 @@
 //============================================================================
-// Name        : Desesperate.cpp
+// Name        : Main.cpp
 // Author      : Josep
 // Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
@@ -15,6 +13,7 @@
 #include "graph/DirectedDepthFirstPaths.h"
 #include "graph/BreadthFirstPaths.h"
 #include "graph/DirectedCycle.h"
+#include "graph/ConnectedComponents.h"
 
 using namespace std;
 
@@ -100,17 +99,33 @@ int main() {
 
 */
 	/*
+	 *  Connected Compoents
+	 */
+
+	AdjListGraph k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
+	ConnectedComponents cc(k);
+
+	cout << "Number of connected components: " << cc.numberComponents() << endl;
+	cout << "connected 0 - 4: " << cc.connected(0,4) << " id[0], id[4]: " << cc.componentId(0) << ", " << cc.componentId(4)<< endl;
+	cout << "connected 0 - 7: " << cc.connected(0,7) << " id[0], id[7]: " << cc.componentId(0) << ", " << cc.componentId(7)<< endl;
+
+
+
+	/*
 	 * Digraph
 	 */
 	//tinyDG
+	/*
 	DigraphAdjList k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
 	cout << "k: \n" << k.toString() << endl;
 	cout << "order: " << k.getOrder() << endl;
 	cout << "size: " << k.getSize() << endl;
 
+*/
 	/*
 	 * Directed Depth First Path
 	 */
+	/*
 	DirectedDepthFirstPaths dfp = DirectedDepthFirstPaths(k,0);
 	for (int i = 0; i < k.getOrder(); i++)  {
 		list<int> paths = dfp.pathTo(i);
@@ -127,6 +142,7 @@ int main() {
 	else {
 		cout << "There is no directed cycle" << endl;
 	}
+*/
 
 	return 0;
 }

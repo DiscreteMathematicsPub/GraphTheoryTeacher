@@ -18,6 +18,7 @@ DepthFirstPaths::DepthFirstPaths(AdjListGraph & g, int s) {
 
 	edgeTo = new int[g.getOrder()];
 	this->s = s;
+	count = 0;
 	dfs(g,s);
 }
 
@@ -28,6 +29,7 @@ DepthFirstPaths::~DepthFirstPaths() {
 
 void DepthFirstPaths::dfs(AdjListGraph & g, int v) {
 	visited[v] = true;
+	count++;
 	for (auto & w : g.adj(v)) {
 		if (!visited[w]) {
 			edgeTo[w] = v;
