@@ -5,7 +5,8 @@
  *      Author: roure
  */
 
-#include "DirectedDepthFirstOrder.h"
+#include "../digraph/DirectedDepthFirstOrder.h"
+
 #include <iostream>
 
 namespace std {

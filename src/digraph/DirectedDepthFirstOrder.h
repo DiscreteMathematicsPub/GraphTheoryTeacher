@@ -9,7 +9,8 @@
 #define BASICLISTGRAPH_DIRECTED_DEPTHFIRSTORDER_H_
 
 #include <deque>
-#include "DigraphAdjList.h"
+
+#include "../digraph/DigraphAdjList.h"
 
 namespace std {
 class DirectedDepthFirstOrder {

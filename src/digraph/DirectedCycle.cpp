@@ -5,7 +5,8 @@
  *      Author: roure
  */
 
-#include "DirectedCycle.h"
+#include "../digraph/DirectedCycle.h"
+
 #include <iostream>
 
 namespace std {

@@ -7,15 +7,15 @@
 #include <iostream>
 #include <list>
 
+#include "digraph/DigraphAdjList.h"
+#include "digraph/DirectedCycle.h"
+#include "digraph/DirectedDepthFirstOrder.h"
+#include "digraph/DirectedDepthFirstPaths.h"
 #include "graph/AdjListGraph.h"
-#include "graph/DigraphAdjList.h"
 #include "graph/DepthFirstPaths.h"
-#include "graph/DirectedDepthFirstPaths.h"
 #include "graph/BreadthFirstPaths.h"
-#include "graph/DirectedCycle.h"
 #include "graph/ConnectedComponents.h"
 #include "graph/Bipartite.h"
-#include "graph/DirectedDepthFirstOrder.h"
 
 using namespace std;
 
