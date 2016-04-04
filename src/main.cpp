@@ -15,6 +15,7 @@
 #include "graph/DirectedCycle.h"
 #include "graph/ConnectedComponents.h"
 #include "graph/Bipartite.h"
+#include "graph/DirectedDepthFirstOrder.h"
 
 using namespace std;
 
@@ -157,6 +158,26 @@ int main() {
 		cout << "There is no directed cycle" << endl;
 	}
 */
+	// Digraph pre, post, reversePost orders
+	DigraphAdjList dg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
+	DirectedDepthFirstOrder ddfo = DirectedDepthFirstOrder(dg);
+	cout << "Preorder: ";
+	for (auto &v : ddfo.preOrder()) {
+		cout << v << ", ";
+	}
+	cout << endl;
+
+	cout << "Postorder: ";
+	for (auto &v : ddfo.postOrder()) {
+		cout << v << ", ";
+	}
+	cout << endl;
+
+	cout << "Reverse Post Order: ";
+	for (auto &v : ddfo.reversePostOrder()) {
+		cout << v << ", ";
+	}
+	cout << endl;
 
 	return 0;
 }
