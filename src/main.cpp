@@ -16,6 +16,8 @@
 #include "graph/BreadthFirstPaths.h"
 #include "graph/ConnectedComponents.h"
 #include "graph/Bipartite.h"
+#include "minSpanningTree/EdgeWeightedGraph.h"
+#include "minSpanningTree/LazyPrimMST.h"
 
 using namespace std;
 
@@ -178,6 +180,25 @@ int main() {
 		cout << v << ", ";
 	}
 	cout << endl;
+
+
+	/*
+	 * Edge Weighted Graph
+	 */
+
+	//tinyEWG
+	cout << endl;
+	EdgeWeightedGraph tewg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWG.txt");
+	cout << "tewg: \n" << tewg.toString() << endl;
+	cout << "order: " << tewg.getOrder() << endl;
+
+
+	LazyPrimMST mstTree(tewg);
+	cout << "MST: " << endl;
+	for (auto e : mstTree.getMST()) {
+		cout << *e << endl;
+
+	}
 
 	return 0;
 }
