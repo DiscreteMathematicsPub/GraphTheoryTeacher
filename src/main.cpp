@@ -18,6 +18,8 @@
 #include "graph/Bipartite.h"
 #include "minSpanningTree/EdgeWeightedGraph.h"
 #include "minSpanningTree/LazyPrimMST.h"
+#include "shortestPath/EdgeWeightedDigraph.h"
+#include "shortestPath/BreadthFirstPathsDigraph.h"
 
 using namespace std;
 
@@ -199,6 +201,27 @@ int main() {
 		cout << *e << endl;
 
 	}
+
+	/*
+	 * Edge Weighted DiGraph
+	 */
+
+	//tinyEWD
+	cout << endl;
+	EdgeWeightedDigraph tewd("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWD.txt");
+	cout << "tewd: \n" << tewd.toString() << endl;
+	cout << "order: " << tewd.getOrder() << endl;
+
+	BreadthFirstPathsDigraph bfpd = BreadthFirstPathsDigraph(tewd,4);
+	for (int i = 0; i < tewd.getOrder(); i++)  {
+		list<WeightedArc *> paths = bfpd.pathTo(i);
+		cout << endl << "Breadth First Path Digraph. From 4 to " << i << ":  ";
+		for (auto e : paths) {
+			cout << *e << ", ";
+		}
+	}
+
+
 
 	return 0;
 }

@@ -25,7 +25,7 @@ public:
 	friend std::ostream & operator<<(std::ostream & Str, WeightedEdge const & e); // this is a friend function. It doesn't belong to the class
 private:
 
-	int v;
+	int from;
 	int w;
 	double weight;
 

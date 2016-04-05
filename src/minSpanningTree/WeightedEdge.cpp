@@ -24,7 +24,7 @@ template <typename T>
 
 
 WeightedEdge::WeightedEdge(int v, int w, double weight) {
-	this->v = v;
+	this->from = v;
 	this->w = w;
 	this->weight = weight;
 }
@@ -37,12 +37,12 @@ double WeightedEdge::getWeight() const{
 }
 
 int WeightedEdge::getEitherEnd() const{
-	return v;
+	return from;
 }
 
 int WeightedEdge::getOtherEnd(int u) const{
-	if (u == v) return w;
-	else if (u == w) return v;
+	if (u == from) return w;
+	else if (u == w) return from;
 	else throw runtime_error("Did not give a correct edge end");
 }
 
