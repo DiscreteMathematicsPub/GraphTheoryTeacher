@@ -39,6 +39,7 @@ private:
 	priority_queue<VertexDistance *> pq;
 
 	void bfs(EdgeWeightedDigraph & g, int v);
+	void relax (EdgeWeightedDigraph & g, VertexDistance *v);
 
 public:
 	DijkstraSP(EdgeWeightedDigraph & g, int s);

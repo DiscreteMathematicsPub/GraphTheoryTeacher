@@ -20,6 +20,7 @@
 #include "minSpanningTree/LazyPrimMST.h"
 #include "shortestPath/EdgeWeightedDigraph.h"
 #include "shortestPath/BreadthFirstPathsDigraph.h"
+#include "shortestPath/DijkstraSP.h"
 
 using namespace std;
 
@@ -221,6 +222,14 @@ int main() {
 		}
 	}
 
+	DijkstraSP dsp = DijkstraSP(tewd,4);
+	for (int i = 0; i < tewd.getOrder(); i++)  {
+		list<WeightedArc *> paths = bfpd.pathTo(i);
+		cout << endl << "Breadth First Path Digraph. From 4 to " << i << ":  ";
+		for (auto e : paths) {
+			cout << *e << ", ";
+		}
+	}
 
 
 	return 0;

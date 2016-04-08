@@ -8,8 +8,25 @@
 #include "DijkstraSP.h"
 
 #include <limits>
+#include<iostream>
+#include<stdio.h>
 
 namespace std {
+
+void printPriorityQ(priority_queue<VertexDistance *> &s)
+{
+    if(s.empty())
+    {
+        cout << endl;
+        return;
+    }
+    VertexDistance * x= s.top();
+    s.pop();
+    cout << x->getVertex() << " " << x->getDistance() << " , ";
+
+    printPriorityQ(s);
+    s.push(x);
+ }
 
 
 DijkstraSP::DijkstraSP(EdgeWeightedDigraph & g, int s) {
@@ -23,7 +40,7 @@ DijkstraSP::DijkstraSP(EdgeWeightedDigraph & g, int s) {
 		edgeTo[i]=NULL;
 	}
 
-	distTo = new double* [g.getSize()];
+	distTo = new double[g.getSize()];
 	for (int i=0; i<g.getSize(); i++) {
 		distTo[i]= numeric_limits<double>::max();
 	}
@@ -44,18 +61,33 @@ void DijkstraSP::bfs(EdgeWeightedDigraph & g, int v) {
 	pq.push(new VertexDistance(v,0));
 
 	while (!pq.empty()) {
-		int w = pq.top();
+		printPriorityQ(pq);
+
+		VertexDistance * w = pq.top();
 		pq.pop();
-		for (auto arc : g.adj(w)) {
-			if (!visited[arc->getTo()]) {
-				edgeTo[arc->getTo()] = arc;
-				visited[arc->getTo()] = true;
-				pq.push(arc->getTo());
-			}
-		}
+
+		relax(g, w);
+
+		delete w;
 	}
 }
 
+void DijkstraSP::relax(EdgeWeightedDigraph & g, VertexDistance *v) {
+	//this should be relax
+	cout << "Relax, vertexDistance: " << v->getVertex() << " " << v->getDistance() << endl;
+	for (auto arc : g.adj(v->getVertex())) {
+		//if (!visited[arc->getTo()] &&
+		printf("dist(%i)=%4.2f > dist(%i)=%4.2f + dist(e)=%4.2f \n", arc->getTo(), distTo[arc->getTo()], v->getVertex(), distTo[v->getVertex()], arc->getWeight() );
+		//		cout << "dist(w): " << distTo[arc->getTo()] << " > dist(v): " << distTo[v->getVertex()] << " + dist(e): " << v->getDistance() << endl;
+		if(	distTo[arc->getTo()] > distTo[v->getVertex()] + arc->getWeight()) {
+			distTo[arc->getTo()] = distTo[v->getVertex()] + arc->getWeight();
+			edgeTo[arc->getTo()] = arc;
+			visited[arc->getTo()] = true;
+			printf("push: %i %4.2f \n", arc->getTo(), distTo[arc->getTo()] );
+			pq.push(new VertexDistance(arc->getTo(), distTo[arc->getTo()]));
+		}
+	}
+}
 
 bool DijkstraSP::hasPathTo(int v) {
 	return visited[v];
@@ -90,6 +122,7 @@ VertexDistance::VertexDistance(int v, double d) {
 
 
 bool VertexDistance::operator<(const VertexDistance& right) const {
+	printf("operator %2.4f < %2.4f \n", right.distance, distance);
 	return right.distance < distance;
 }
 
