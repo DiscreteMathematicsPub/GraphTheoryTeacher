@@ -28,14 +28,18 @@ DepthFirstPaths::~DepthFirstPaths() {
 }
 
 void DepthFirstPaths::dfs(AdjListGraph & g, int v) {
+	cout << "dfs(" << v << ")" << endl;
 	visited[v] = true;
 	count++;
 	for (auto & w : g.adj(v)) {
+		if (visited[w]) { cout << "check " << w << endl;}
 		if (!visited[w]) {
 			edgeTo[w] = v;
 			dfs(g,w);
 		}
 	}
+
+	cout << "finished " << v << endl;
 }
 
 

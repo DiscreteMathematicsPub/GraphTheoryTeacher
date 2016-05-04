@@ -74,37 +74,39 @@ int main() {
 	string r = g.toString();
 	cout << "g: \n" << r << endl;
 
+*/
 
 	//tinyClassExample //hola
-	AdjListGraph k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyClassExample.txt");
-	cout << "k: \n" << k.toString() << endl;
-	cout << "order: " << k.getOrder() << endl;
+	AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyClassExample.txt");
+	cout << "g: \n" << g.toString() << endl;
+	cout << "order: " << g.getOrder() << endl;
 
-*/
+
 	/*
 	 * Depth First Path
 	 */
-/*
-	DepthFirstPaths dfp = DepthFirstPaths(k,0);
-	for (int i = 0; i < k.getOrder(); i++)  {
+
+	DepthFirstPaths dfp = DepthFirstPaths(g,0);
+	for (int i = 0; i < g.getOrder(); i++)  {
 		list<int> paths = dfp.pathTo(i);
 		cout << endl << "Depth First Path. From 0 to " << i << ":  ";
 		printPath(paths, i);
 	}
 	cout <<endl;
-*/
+
 	/*
 	 * Breadth First Path
 	 */
-	/*
-	BreadthFirstPaths bfp = BreadthFirstPaths(k,0);
-	for (int i = 0; i < k.getOrder(); i++)  {
+
+	BreadthFirstPaths bfp = BreadthFirstPaths(g,0);
+	for (int i = 0; i < g.getOrder(); i++)  {
 		list<int> paths = bfp.pathTo(i);
 		cout << endl << "Breadth First Path. From 0 to " << i << ":  ";
 		printPath(paths, i);
 	}
+	cout << endl;
 
-*/
+
 	/*
 	 *  Connected Compoents
 	 */
@@ -122,9 +124,9 @@ int main() {
 	 * Bipartite
 	 */
 	//AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\bipartite.txt");
-	AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
-	Bipartite bp(g);
-	for (int i=0; i<g.getOrder(); i++) {
+	AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
+	Bipartite bp(gbp);
+	for (int i=0; i<gbp.getOrder(); i++) {
 		cout << i << " col: " << bp.getColor(i) << endl;
 	}
 	printStack(bp.oddCycle());

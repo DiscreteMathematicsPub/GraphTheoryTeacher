@@ -7,6 +7,7 @@
 
 #include "BreadthFirstPaths.h"
 #include <queue>
+#include <iostream>
 
 namespace std {
 
@@ -35,11 +36,13 @@ void BreadthFirstPaths::bfs(AdjListGraph & g, int v) {
 	while (!needToProcess.empty()) {
 		int w = needToProcess.front();
 		needToProcess.pop();
+		cout << "removes from queue " << w << endl;
 		for (int u : g.adj(w)) {
 			if (!visited[u]) {
 				edgeTo[u] = w;
 				visited[u] = true;
 				needToProcess.push(u);
+				cout << "adds " << u << " to queue" << endl;
 			}
 		}
 	}
