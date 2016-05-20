@@ -16,6 +16,7 @@
 #include "graph/BreadthFirstPaths.h"
 #include "graph/ConnectedComponents.h"
 #include "graph/Bipartite.h"
+#include "graph/Cycle.h"
 #include "minSpanningTree/EdgeWeightedGraph.h"
 #include "minSpanningTree/LazyPrimMST.h"
 #include "shortestPath/EdgeWeightedDigraph.h"
@@ -104,7 +105,7 @@ int main() {
 		cout << endl << "Breadth First Path. From 0 to " << i << ":  ";
 		printPath(paths, i);
 	}
-	cout << endl;
+	cout << endl << endl;
 
 
 	/*
@@ -119,17 +120,35 @@ int main() {
 	cout << "connected 0 - 7: " << cc.connected(0,7) << " id[0], id[7]: " << cc.componentId(0) << ", " << cc.componentId(7)<< endl;
 	cout << endl;
 
+	/*
+	 *   Cycle detection
+	 */
+	//AdjListGraph kk("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\oneArc.txt");
+	cout << "Cycles:" << endl;
+	Cycle cg(k);
+	cout << "Has Cycles: " << cg.hasCycle() << endl;
+	if (cg.hasCycle()) {
+		cout << "Cycle: ";
+		printStack(cg.getCycle());
+	}
+	cout << endl;
 
 	/*
 	 * Bipartite
 	 */
-	//AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\bipartite.txt");
-	AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
+	cout << "Bipartite:" << endl;
+	//AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\oneArc.txt");
+	AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\bipartite.txt");
+	//AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
 	Bipartite bp(gbp);
 	for (int i=0; i<gbp.getOrder(); i++) {
 		cout << i << " col: " << bp.getColor(i) << endl;
 	}
-	printStack(bp.oddCycle());
+	if (!bp.isBipartite()) {
+		cout << "odd cycle: " ;
+		printStack(bp.oddCycle());
+	}
+	cout << endl;
 
 
 
@@ -137,26 +156,28 @@ int main() {
 	 * Digraph
 	 */
 	//tinyDG
-	/*
-	DigraphAdjList k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
-	cout << "k: \n" << k.toString() << endl;
-	cout << "order: " << k.getOrder() << endl;
-	cout << "size: " << k.getSize() << endl;
 
-*/
+	//DigraphAdjList kk("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
+	DigraphAdjList kk("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDG.txt");
+	cout << "kk: \n" << kk.toString() << endl;
+	cout << "order: " << kk.getOrder() << endl;
+	cout << "size: " << kk.getSize() << endl;
+
+
 	/*
 	 * Directed Depth First Path
 	 */
-	/*
-	DirectedDepthFirstPaths dfp = DirectedDepthFirstPaths(k,0);
-	for (int i = 0; i < k.getOrder(); i++)  {
-		list<int> paths = dfp.pathTo(i);
+
+	DirectedDepthFirstPaths ddfp = DirectedDepthFirstPaths(kk,0);
+	for (int i = 0; i < kk.getOrder(); i++)  {
+		list<int> paths = ddfp.pathTo(i);
 		cout << endl << "Directed Depth First Path. From 0 to " << i << ":  ";
 		printPath(paths, i);
 	}
 	cout <<endl;
 
-	DirectedCycle dcycle = DirectedCycle(k);
+	DigraphAdjList dg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
+	DirectedCycle dcycle = DirectedCycle(dg);
 	if (dcycle.hasCycle()) {
 		printStack(dcycle.getCycle());
 		cout << endl;
@@ -164,9 +185,9 @@ int main() {
 	else {
 		cout << "There is no directed cycle" << endl;
 	}
-*/
+
 	// Digraph pre, post, reversePost orders
-	DigraphAdjList dg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
+	cout << "dg: \n" << dg.toString() << endl;
 	DirectedDepthFirstOrder ddfo = DirectedDepthFirstOrder(dg);
 	cout << "Preorder: ";
 	for (auto &v : ddfo.preOrder()) {

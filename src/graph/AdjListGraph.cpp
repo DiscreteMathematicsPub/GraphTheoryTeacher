@@ -81,7 +81,7 @@ void AdjListGraph::addEdge(int v, int w) {
 
 
 list<int> & AdjListGraph::adj(int v) const{
-	if (v < 0 || v >= size)  {
+	if (v < 0 || v >= order)  {
 		throw invalid_argument ("Invalid argument");
 	}
 	return adjacent[v];
