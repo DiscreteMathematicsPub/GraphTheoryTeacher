@@ -26,7 +26,7 @@ public:
 private:
 
 	int from;
-	int w;
+	int to;
 	double weight;
 
 };

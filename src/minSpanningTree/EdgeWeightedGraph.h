@@ -29,6 +29,7 @@ public:
 	int getOrder(); //vertex
 	void addEdge(WeightedEdge *e);
 	list<WeightedEdge *> & adj(int v) const;
+	list<WeightedEdge *> & getAllEdges();
 	int degree (int v);
 	string toString();
 

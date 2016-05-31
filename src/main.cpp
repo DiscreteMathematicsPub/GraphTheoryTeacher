@@ -19,6 +19,7 @@
 #include "graph/Cycle.h"
 #include "minSpanningTree/EdgeWeightedGraph.h"
 #include "minSpanningTree/LazyPrimMST.h"
+#include "minSpanningTree/KruskalMST.h"
 #include "shortestPath/EdgeWeightedDigraph.h"
 #include "shortestPath/BreadthFirstPathsDigraph.h"
 #include "shortestPath/DijkstraSP.h"
@@ -219,13 +220,20 @@ int main() {
 	cout << "order: " << tewg.getOrder() << endl;
 
 
-	LazyPrimMST mstTree(tewg);
-	cout << "MST: " << endl;
-	for (auto e : mstTree.getMST()) {
+	LazyPrimMST mstTreePrim(tewg);
+	cout << "Lazy Prim MST: " << endl;
+	for (auto e : mstTreePrim.getMST()) {
 		cout << *e << endl;
 
 	}
+	cout << endl;
 
+	KruskalMST mstTreeK(tewg);
+	cout << "Kruskal MST: " << endl;
+	for (auto e : mstTreeK.getMST()) {
+		cout << *e << endl;
+
+	}
 	/*
 	 * Edge Weighted DiGraph
 	 */

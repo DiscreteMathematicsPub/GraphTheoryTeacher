@@ -8,7 +8,23 @@
 #ifndef EXERCISES_GRAPHPROPERTIES_H_
 #define EXERCISES_GRAPHPROPERTIES_H_
 
+#include <list>
 
+namespace std {
+
+class GraphProperties {
+public:
+	GraphProperties(AdjListGraph &g);
+
+	int eccentricity(int v);
+	int diameter();
+	int radius();
+	list<int> & center();
+
+	virtual ~GraphProperties();
+};
+
+} /* namespace std */
 
 
 

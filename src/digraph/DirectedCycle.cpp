@@ -13,12 +13,13 @@ namespace std {
 
 DirectedCycle::DirectedCycle(DigraphAdjList & g) {
 	visited = new bool[g.getOrder()];
+	onStack = new bool[g.getOrder()];
 	for (int i=0; i<g.getOrder(); i++) {
 		visited[i]=false;
+		onStack[i]=false;
 	}
 
 	edgeTo = new int[g.getOrder()];
-	onStack = new bool[g.getOrder()];
 	for (int v=0; v<g.getOrder(); v++) {
 		dfs(g,v);
 	}

@@ -32,7 +32,7 @@ private:
 };
 
 /*
- * This class will be used to compare two weighted edges
+ * This class will be used to compare two weighted arcs
  */
 class WeightedArcComparison {
 public:

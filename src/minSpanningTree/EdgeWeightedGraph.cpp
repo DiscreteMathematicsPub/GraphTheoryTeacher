@@ -93,6 +93,11 @@ list<WeightedEdge *> & EdgeWeightedGraph::adj(int v) const{
 	return adjacent[v];
 }
 
+list<WeightedEdge *> & EdgeWeightedGraph::getAllEdges() {
+	return edgesOnce;
+}
+
+
 string EdgeWeightedGraph::toString() {
 	string result;
 
