@@ -13,7 +13,7 @@
 
 namespace std {
 
-void printPriorityQ(priority_queue<VertexDistance *> &s)
+void printPriorityQ(priority_queue<VertexDistance *, vector<VertexDistance *>, VertexDistanceComparison> &s)
 {
     if(s.empty())
     {
@@ -57,7 +57,6 @@ DijkstraSP::~DijkstraSP() {
 
 void DijkstraSP::bfs(EdgeWeightedDigraph & g, int v) {
 
-	visited[v] = true;
 	pq.push(new VertexDistance(v,0));
 
 	while (!pq.empty()) {
@@ -66,7 +65,10 @@ void DijkstraSP::bfs(EdgeWeightedDigraph & g, int v) {
 		VertexDistance * w = pq.top();
 		pq.pop();
 
-		relax(g, w);
+		if (!visited[w->getVertex()]) {
+			visited[w->getVertex()] = true;
+			relax(g, w);
+		}
 
 		delete w;
 	}
@@ -76,15 +78,17 @@ void DijkstraSP::relax(EdgeWeightedDigraph & g, VertexDistance *v) {
 	//this should be relax
 	cout << "Relax, vertexDistance: " << v->getVertex() << " " << v->getDistance() << endl;
 	for (auto arc : g.adj(v->getVertex())) {
-		//if (!visited[arc->getTo()] &&
-		printf("dist(%i)=%4.2f > dist(%i)=%4.2f + dist(e)=%4.2f \n", arc->getTo(), distTo[arc->getTo()], v->getVertex(), distTo[v->getVertex()], arc->getWeight() );
-		//		cout << "dist(w): " << distTo[arc->getTo()] << " > dist(v): " << distTo[v->getVertex()] << " + dist(e): " << v->getDistance() << endl;
-		if(	distTo[arc->getTo()] > distTo[v->getVertex()] + arc->getWeight()) {
-			distTo[arc->getTo()] = distTo[v->getVertex()] + arc->getWeight();
-			edgeTo[arc->getTo()] = arc;
-			visited[arc->getTo()] = true;
-			printf("push: %i %4.2f \n", arc->getTo(), distTo[arc->getTo()] );
-			pq.push(new VertexDistance(arc->getTo(), distTo[arc->getTo()]));
+		if (!visited[arc->getTo()]) {
+			printf("dist(%i)=%4.2f > dist(%i)=%4.2f + dist(e)=%4.2f \n", arc->getTo(), distTo[arc->getTo()], v->getVertex(), distTo[v->getVertex()], arc->getWeight() );
+
+			if(	distTo[arc->getTo()] > distTo[v->getVertex()] + arc->getWeight()) {
+
+				distTo[arc->getTo()] = distTo[v->getVertex()] + arc->getWeight();
+				edgeTo[arc->getTo()] = arc;
+				pq.push(new VertexDistance(arc->getTo(), distTo[arc->getTo()]));
+				printf("edgeTo[%i]= ", arc->getTo()); cout << *edgeTo[arc->getTo()] << endl;
+				printf("push: %i %4.2f \n", arc->getTo(), distTo[arc->getTo()] );
+			}
 		}
 	}
 }
@@ -126,7 +130,8 @@ bool VertexDistance::operator<(const VertexDistance& right) const {
 	return right.distance < distance;
 }
 
-int VertexDistance::getVertex() { return vertex;}
-double VertexDistance::getDistance() {return distance;}
+
+int VertexDistance::getVertex() const { return vertex;}
+double VertexDistance::getDistance() const {return distance;}
 
 } /* namespace std */

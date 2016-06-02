@@ -23,9 +23,18 @@ public:
 	VertexDistance(int v, double d);
 	bool operator<(const VertexDistance& right) const;
 
-	int getVertex();
-	double getDistance();
+	int getVertex() const;
+	double getDistance() const;
 };
+
+class VertexDistanceComparison {
+public:
+	bool operator() (const VertexDistance *lhs, const VertexDistance * rhs) const {
+		//we want to prioritize small values
+		return lhs->getDistance() > rhs->getDistance();
+	}
+};
+
 
 class DijkstraSP {
 private:
@@ -36,7 +45,8 @@ private:
 	int count;		// number of vertices connected to s
 	int s;			// source vertex
 
-	priority_queue<VertexDistance *> pq;
+	//priority_queue<VertexDistance *> pq;
+	priority_queue<VertexDistance *, vector<VertexDistance *>, VertexDistanceComparison> pq;
 
 	void bfs(EdgeWeightedDigraph & g, int v);
 	void relax (EdgeWeightedDigraph & g, VertexDistance *v);

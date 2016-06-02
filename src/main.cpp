@@ -255,8 +255,8 @@ int main() {
 
 	DijkstraSP dsp = DijkstraSP(tewd,4);
 	for (int i = 0; i < tewd.getOrder(); i++)  {
-		list<WeightedArc *> paths = bfpd.pathTo(i);
-		cout << endl << "Breadth First Path Digraph. From 4 to " << i << ":  ";
+		list<WeightedArc *> paths = dsp.pathTo(i);
+		cout << endl << "DijkstraSP. From 4 to " << i << ":  ";
 		for (auto e : paths) {
 			cout << *e << ", ";
 		}
