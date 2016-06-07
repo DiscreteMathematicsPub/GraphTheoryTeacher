@@ -23,6 +23,7 @@
 #include "shortestPath/EdgeWeightedDigraph.h"
 #include "shortestPath/BreadthFirstPathsDigraph.h"
 #include "shortestPath/DijkstraSP.h"
+#include "shortestPath/AcyclicSP.h"
 
 using namespace std;
 
@@ -242,7 +243,6 @@ int main() {
 	cout << endl;
 	EdgeWeightedDigraph tewd("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWD.txt");
 	cout << "tewd: \n" << tewd.toString() << endl;
-	cout << "order: " << tewd.getOrder() << endl;
 
 	BreadthFirstPathsDigraph bfpd = BreadthFirstPathsDigraph(tewd,4);
 	for (int i = 0; i < tewd.getOrder(); i++)  {
@@ -262,6 +262,19 @@ int main() {
 		}
 	}
 
+	//tinyEWD
+	cout << endl;
+	EdgeWeightedDigraph tewdag("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWDAG.txt");
+	cout << "tewdag: \n" << tewd.toString() << endl;
+
+	AcyclicSP asp = AcyclicSP(tewdag,4);
+	for (int i = 0; i < tewdag.getOrder(); i++)  {
+		list<WeightedArc *> paths = asp.pathTo(i);
+		cout << endl << "AcyclicSP. From 4 to " << i << ":  ";
+		for (auto e : paths) {
+			cout << *e << ", ";
+		}
+	}
 
 	return 0;
 }

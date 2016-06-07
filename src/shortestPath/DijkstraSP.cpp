@@ -30,7 +30,7 @@ void printPriorityQ(priority_queue<VertexDistance *, vector<VertexDistance *>, V
 
 
 DijkstraSP::DijkstraSP(EdgeWeightedDigraph & g, int s) {
-	visited = new bool[g.getSize()];
+	visited = new bool[g.getOrder()];
 	for (int i=0; i<g.getOrder(); i++) {
 		visited[i]=false;
 	}
@@ -53,6 +53,7 @@ DijkstraSP::DijkstraSP(EdgeWeightedDigraph & g, int s) {
 DijkstraSP::~DijkstraSP() {
 	delete[]  visited;
 	delete[]  edgeTo;
+	delete[]  distTo;
 }
 
 void DijkstraSP::bfs(EdgeWeightedDigraph & g, int v) {
@@ -67,27 +68,22 @@ void DijkstraSP::bfs(EdgeWeightedDigraph & g, int v) {
 
 		if (!visited[w->getVertex()]) {
 			visited[w->getVertex()] = true;
-			relax(g, w);
+			relax(g, w->getVertex());
 		}
 
 		delete w;
 	}
 }
 
-void DijkstraSP::relax(EdgeWeightedDigraph & g, VertexDistance *v) {
+void DijkstraSP::relax(EdgeWeightedDigraph & g, int v) {
 	//this should be relax
-	cout << "Relax, vertexDistance: " << v->getVertex() << " " << v->getDistance() << endl;
-	for (auto arc : g.adj(v->getVertex())) {
-		if (!visited[arc->getTo()]) {
-			printf("dist(%i)=%4.2f > dist(%i)=%4.2f + dist(e)=%4.2f \n", arc->getTo(), distTo[arc->getTo()], v->getVertex(), distTo[v->getVertex()], arc->getWeight() );
-
-			if(	distTo[arc->getTo()] > distTo[v->getVertex()] + arc->getWeight()) {
-
-				distTo[arc->getTo()] = distTo[v->getVertex()] + arc->getWeight();
+	cout << "Relax vertex: " << v << endl;
+	for (auto arc : g.adj(v)) {
+		if (!visited[arc->getTo()]) { //we may have repeated vertices in the queue
+			if(	distTo[arc->getTo()] > distTo[v] + arc->getWeight()) {
+				distTo[arc->getTo()] = distTo[v] + arc->getWeight();
 				edgeTo[arc->getTo()] = arc;
 				pq.push(new VertexDistance(arc->getTo(), distTo[arc->getTo()]));
-				printf("edgeTo[%i]= ", arc->getTo()); cout << *edgeTo[arc->getTo()] << endl;
-				printf("push: %i %4.2f \n", arc->getTo(), distTo[arc->getTo()] );
 			}
 		}
 	}
@@ -113,25 +109,9 @@ list<WeightedArc *> DijkstraSP::pathTo(int v) {
 }
 
 
-int DijkstraSP::numConnected() {
-	return this->count;
+int DijkstraSP::distanceTo(int v) {
+	return distTo[v];
 }
 
-
-//////////////////////// Vertex Distance /////////////////
-VertexDistance::VertexDistance(int v, double d) {
-	vertex = v;
-	distance = d;
-}
-
-
-bool VertexDistance::operator<(const VertexDistance& right) const {
-	printf("operator %2.4f < %2.4f \n", right.distance, distance);
-	return right.distance < distance;
-}
-
-
-int VertexDistance::getVertex() const { return vertex;}
-double VertexDistance::getDistance() const {return distance;}
 
 } /* namespace std */

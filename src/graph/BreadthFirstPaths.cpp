@@ -13,7 +13,7 @@ namespace std {
 
 
 BreadthFirstPaths::BreadthFirstPaths(AdjListGraph & g, int s) {
-	visited = new bool[g.getSize()];
+	visited = new bool[g.getOrder()];
 	for (int i=0; i<g.getOrder(); i++) {
 		visited[i]=false;
 	}
