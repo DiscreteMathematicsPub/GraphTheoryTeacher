@@ -80,7 +80,7 @@ int main() {
 */
 
 	//tinyClassExample //hola
-	AdjListGraph g("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyClassExample.txt");
+	AdjListGraph g("/Users/josep/workspaceMD/GraphFileDefinition/tinyClassExample.txt");
 	cout << "g: \n" << g.toString() << endl;
 	cout << "order: " << g.getOrder() << endl;
 
@@ -114,7 +114,7 @@ int main() {
 	 *  Connected Compoents
 	 */
 
-	AdjListGraph k("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
+	AdjListGraph k("/Users/josep/workspaceMD/GraphFileDefinition/tinyG.txt");
 	ConnectedComponents cc(k);
 
 	cout << "Number of connected components: " << cc.numberComponents() << endl;
@@ -140,7 +140,7 @@ int main() {
 	 */
 	cout << "Bipartite:" << endl;
 	//AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\oneArc.txt");
-	AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\bipartite.txt");
+	AdjListGraph gbp("/Users/josep/workspaceMD/GraphFileDefinition/bipartite.txt");
 	//AdjListGraph gbp("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyG.txt");
 	Bipartite bp(gbp);
 	for (int i=0; i<gbp.getOrder(); i++) {
@@ -160,7 +160,7 @@ int main() {
 	//tinyDG
 
 	//DigraphAdjList kk("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
-	DigraphAdjList kk("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDG.txt");
+	DigraphAdjList kk("/Users/josep/workspaceMD/GraphFileDefinition/tinyDG.txt");
 	cout << "kk: \n" << kk.toString() << endl;
 	cout << "order: " << kk.getOrder() << endl;
 	cout << "size: " << kk.getSize() << endl;
@@ -178,7 +178,7 @@ int main() {
 	}
 	cout <<endl;
 
-	DigraphAdjList dg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyDGnoCycle.txt");
+	DigraphAdjList dg("/Users/josep/workspaceMD/GraphFileDefinition/tinyDGnoCycle.txt");
 	DirectedCycle dcycle = DirectedCycle(dg);
 	if (dcycle.hasCycle()) {
 		printStack(dcycle.getCycle());
@@ -216,7 +216,7 @@ int main() {
 
 	//tinyEWG
 	cout << endl;
-	EdgeWeightedGraph tewg("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWG.txt");
+	EdgeWeightedGraph tewg("/Users/josep/workspaceMD/GraphFileDefinition/tinyEWG.txt");
 	cout << "tewg: \n" << tewg.toString() << endl;
 	cout << "order: " << tewg.getOrder() << endl;
 
@@ -241,7 +241,7 @@ int main() {
 
 	//tinyEWD
 	cout << endl;
-	EdgeWeightedDigraph tewd("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWD.txt");
+	EdgeWeightedDigraph tewd("/Users/josep/workspaceMD/GraphFileDefinition/tinyEWD.txt");
 	cout << "tewd: \n" << tewd.toString() << endl;
 
 	BreadthFirstPathsDigraph bfpd = BreadthFirstPathsDigraph(tewd,4);
@@ -264,7 +264,7 @@ int main() {
 
 	//tinyEWD
 	cout << endl;
-	EdgeWeightedDigraph tewdag("C:\\Users\\roure\\workspaceCPP\\GraphFileDef\\tinyEWDAG.txt");
+	EdgeWeightedDigraph tewdag("/Users/josep/workspaceMD/GraphFileDefinition/tinyEWDAG.txt");
 	cout << "tewdag: \n" << tewd.toString() << endl;
 
 	AcyclicSP asp = AcyclicSP(tewdag,4);

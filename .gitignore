@@ -1,5 +1,6 @@
 # Created by https://www.gitignore.io/api/eclipse,c++,windows
 
+*~
 ### Eclipse ###
 
 #.metadata
@@ -10,7 +11,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
-#.settings/
+.settings/
 #.loadpath
 
 # Eclipse Core
